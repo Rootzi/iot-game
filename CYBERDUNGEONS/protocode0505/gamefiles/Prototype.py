@@ -80,8 +80,10 @@ while True:
         keys = []
         for i in range(26):
             letter = chr(i + 65)  # A is chr(65)
-            x_pos = 65 + 90 * (i % 10)
-            y_pos = SCREEN_Y_CENTER + 90 * (i // 10)
+            x_pos_offset = 65
+            y_pos_offset = SCREEN_Y_CENTER
+            x_pos = x_pos_offset + 90 * (i % 10)
+            y_pos = y_pos_offset + 90 * (i // 10)
             rect = pygame.draw.rect(screen, RED, (x_pos, y_pos, 80, 80), 2)
             text = OSCFONT.render(letter, True, RED)
             screen.blit(text, (x_pos + 5, y_pos + 5))
@@ -96,15 +98,13 @@ while True:
 
         return keys
 
-
-    # Draw SUBMIT button
-    # x_pos = 90
-    # y_pos = SCREEN_Y_CENTER + 90
-    button_width, button_height = 150, 50
+    button_width = 150
+    button_height = 50
     button_rect = pygame.Rect(((screen.get_width() - 600) - button_width) // 2,
                             ((screen.get_height() - 200)  - button_height) // 2,
                             button_width,
                             button_height)
+    
     text = OSCFONT.render("SUBMIT", True, RED)
 
 
@@ -127,23 +127,25 @@ while True:
                     pygame.quit()
                     quit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
+                    scaled_eventpos_x = int(event.pos[0])/relative_scaler_x
+                    scaled_eventpos_y = int(event.pos[1])/relative_scaler_y
                     screen.fill(BLACK)
                     keys=draw_osc()
                     for key in keys:
-                        if key == keys[26] and key[1].collidepoint(event.pos):
+                        if key == keys[26] and key[1].collidepoint(scaled_eventpos_x, scaled_eventpos_y):
                             print("Undo / Backspace key clicked.")
                             if len(word) > 0:
                                 pygame.mixer.Sound.play(keypress)
                                 word = word[:-1]
                                 print(word)
                         else: 
-                            if key[1].collidepoint(event.pos):
+                            if key[1].collidepoint(scaled_eventpos_x, scaled_eventpos_y):
                                 if len(word) < max_chars:
                                     pygame.mixer.Sound.play(keypress)
                                     word+=(key[0])
                                     print(word)
                         
-                    if button_rect.collidepoint(event.pos):
+                    if button_rect.collidepoint(scaled_eventpos_x,scaled_eventpos_y):
                         if len(word) > 0:
                             print("Submit button clicked.")
                             pygame.mixer.Sound.play(keypress)
@@ -759,8 +761,11 @@ while True:
                                 pygame.quit()
                                 sys.exit()
                             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                                scaled_eventpos_x = int(event.pos[0])/relative_scaler_x
+                                scaled_eventpos_y = int(event.pos[1])/relative_scaler_y
                                 print("PAUSE CLICK DETECTED")
-                                if button_rect.collidepoint(event.pos):
+
+                                if button_rect.collidepoint(scaled_eventpos_x,scaled_eventpos_y):
                                     print("BUTTON CLICKED")
                                     # User has clicked the button
                                     highscore_loop = False
@@ -849,8 +854,10 @@ while True:
                                 pygame.quit()
                                 sys.exit()
                             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                                scaled_eventpos_x = int(event.pos[0])/relative_scaler_x
+                                scaled_eventpos_y = int(event.pos[1])/relative_scaler_y
                                 print("PAUSE CLICK DETECTED")
-                                if button_rect.collidepoint(event.pos):
+                                if button_rect.collidepoint(scaled_eventpos_x,scaled_eventpos_y):
                                     print("BUTTON CLICKED")
                                     # User has clicked the button
                                     highscore_loop = False

@@ -473,7 +473,7 @@ while True:
         screen.blit(q1a3_text, (-5,105))
 
     def draw_q2_ans1():
-        q1a1_text = font48.render("                           Report it as spam and block the sender.                ", True, (255, 255, 255), (0,0,0))
+        q1a1_text = font48.render("                             Report it as spam and block the sender.                     ", True, (255, 255, 255), (0,0,0))
         screen.blit(q1a1_text, (0,105))
 
     def draw_q2_ans2():

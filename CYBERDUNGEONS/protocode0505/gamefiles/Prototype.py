@@ -75,6 +75,13 @@ while True:
     # Set level number int (default =1)
     lvl = 1
 
+    # Set cursor
+    cursor = pygame.image.load('gameimages/cursor2.png').convert_alpha()
+    pygame.mouse.set_visible(False)  # hide the cursor
+
+    
+    
+    
     # Draw On-screen keyboard
     def draw_osc():
         keys = []
@@ -156,11 +163,17 @@ while True:
                             print("Must have more than 0 characters.")
                         
             screen.fill(BLACK)
+
             draw_osc()
             screen.blit(text, (button_rect.centerx - text.get_width() // 2,
                             button_rect.centery - text.get_height() // 2))
             text1(word, SCREEN_WIDTH*.1, SCREEN_HEIGHT*.1)
+            cursor_center_x, cursor_center_y = int(cursor.get_width())/2, int(cursor.get_height())/2
+            coord_x, coord_y = int(pygame.mouse.get_pos()[0])/relative_scaler_x, int(pygame.mouse.get_pos()[1])/relative_scaler_y
+            cursor_coord_x, cursor_coord_y = coord_x-cursor_center_x, coord_y-cursor_center_y
+            screen.blit(cursor, (cursor_coord_x,cursor_coord_y))
             draw()
+            
             
     def savescore(username,score):
         scorestr2=str(score)
@@ -780,6 +793,11 @@ while True:
 
                         screen.blit(text, (button_rect.centerx - text.get_width() // 2,
                                         button_rect.centery - text.get_height() // 2))
+                        
+                        cursor_center_x, cursor_center_y = int(cursor.get_width())/2, int(cursor.get_height())/2
+                        coord_x, coord_y = int(pygame.mouse.get_pos()[0])/relative_scaler_x, int(pygame.mouse.get_pos()[1])/relative_scaler_y
+                        cursor_coord_x, cursor_coord_y = coord_x-cursor_center_x, coord_y-cursor_center_y
+                        screen.blit(cursor, (cursor_coord_x,cursor_coord_y))
                         draw()
 
                     mouse_enabled = False
@@ -799,9 +817,13 @@ while True:
             clock.tick(60)
             if breaker:
                 break
-
+        
         draw_score()
         draw_lives()
+        cursor_center_x, cursor_center_y = int(cursor.get_width())/2, int(cursor.get_height())/2
+        coord_x, coord_y = int(pygame.mouse.get_pos()[0])/relative_scaler_x, int(pygame.mouse.get_pos()[1])/relative_scaler_y
+        cursor_coord_x, cursor_coord_y = coord_x-cursor_center_x, coord_y-cursor_center_y
+        screen.blit(cursor, (cursor_coord_x,cursor_coord_y))
         if correct==True:
             draw_correct()
             pygame.mixer.Sound.play(correctsfx)
@@ -872,6 +894,10 @@ while True:
 
                         screen.blit(text, (button_rect.centerx - text.get_width() // 2,
                                         button_rect.centery - text.get_height() // 2))
+                        cursor_center_x, cursor_center_y = int(cursor.get_width())/2, int(cursor.get_height())/2
+                        coord_x, coord_y = int(pygame.mouse.get_pos()[0])/relative_scaler_x, int(pygame.mouse.get_pos()[1])/relative_scaler_y
+                        cursor_coord_x, cursor_coord_y = coord_x-cursor_center_x, coord_y-cursor_center_y
+                        screen.blit(cursor, (cursor_coord_x,cursor_coord_y))
                         draw()
 
                     mouse_enabled = False

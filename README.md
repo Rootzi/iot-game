@@ -1,5 +1,4 @@
-Have git installed  
-Clone the repo (git clone https://github.com/Rootzi/U9-U19-project-col.git)  
-Have python installed  
+Clone repository  
 Run setup.py  
-Run \CYBERDUNGEONS\protocode0505\gamefiles\Prototype.py  
+Install touchmote via touchmote wizard executable  
+Run Prototype.py  

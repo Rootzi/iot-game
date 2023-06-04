@@ -5,7 +5,7 @@ import pygame
 import time
 import re
 import pyautogui
-pyautogui.FAILSAFE = True
+pyautogui.FAILSAFE = False
 
 fname = "Prototype.py"
 dn = os.path.abspath(fname)
